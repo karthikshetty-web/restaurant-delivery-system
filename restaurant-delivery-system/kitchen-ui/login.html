@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kudla Kitchen Display System - Kitchen Staff Sign In">
+    <title>Kitchen Staff Login | Kudla Kitchen KDS</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Kitchen CSS -->
+    <link rel="stylesheet" href="assets/css/kitchen.css">
+</head>
+<body>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem;">
+        <div style="width: 100%; max-width: 420px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-lg);">
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 0.5rem;">👨‍🍳</div>
+                <h1 style="font-size: 1.6rem; font-weight: 800; color: var(--text-primary);">Kitchen Display Sign In</h1>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.3rem;">Kudla Kitchen Display System (KDS)</p>
+            </div>
+
+            <div id="auth-alert" style="display: none; padding: 0.8rem 1rem; border-radius: var(--radius-sm); font-size: 0.88rem; margin-bottom: 1rem; background: rgba(220, 38, 38, 0.1); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3);"></div>
+
+            <form id="kitchen-login-form">
+                <div style="margin-bottom: 1.2rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.4rem;">Staff Email Address</label>
+                    <input type="email" id="kitchen-email" required value="kitchen@restaurant.com" placeholder="kitchen@restaurant.com" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); font-size: 0.95rem; outline: none;" />
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.4rem;">Password</label>
+                    <input type="password" id="kitchen-password" required value="Password123" placeholder="••••••••" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); font-size: 0.95rem; outline: none;" />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                    🔑 Access Kitchen Display
+                </button>
+            </form>
+
+            <div style="margin-top: 1.5rem; text-align: center; font-size: 0.82rem; color: var(--text-muted);">
+                Default Chef Account: <code>kitchen@restaurant.com</code> / <code>Password123</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/kitchen-api.js"></script>
+    <script src="assets/js/kitchen.js"></script>
+    <script>
+        document.getElementById('kitchen-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const alert = document.getElementById('auth-alert');
+            alert.style.display = 'none';
+
+            const email = document.getElementById('kitchen-email').value.trim();
+            const password = document.getElementById('kitchen-password').value.trim();
+
+            KitchenApp.showToast('Authenticating Kitchen Staff...', 'info');
+            const res = await KitchenAPI.login(email, password);
+
+            if (res.success) {
+                KitchenApp.showToast('Authentication Successful!', 'success');
+                window.location.href = 'index.html';
+            } else {
+                alert.innerText = res.message || 'Login failed. Verify credentials.';
+                alert.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

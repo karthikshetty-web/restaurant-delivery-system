@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kudla Kitchen Administrator Portal Sign In">
+    <title>Admin Portal Sign In | Kudla Kitchen</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body style="background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-primary) 100%);">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Main Auth Container -->
+    <main class="auth-container">
+        <div class="auth-card">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="font-size: 2.8rem; margin-bottom: 0.5rem;">👑</div>
+                <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--text-primary);">Admin Portal Sign In</h1>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.4rem;">
+                    Kudla Kitchen Restaurant Management Panel
+                </p>
+            </div>
+
+            <!-- API Error Alert Box -->
+            <div id="auth-alert" class="auth-alert" role="alert"></div>
+
+            <form id="admin-login-form" novalidate>
+                <div class="form-group">
+                    <label for="admin-email" style="font-size: 0.88rem; font-weight: 600;">Admin Email Address</label>
+                    <input type="email" 
+                           id="admin-email" 
+                           class="form-input" 
+                           placeholder="admin@restaurant.com" 
+                           required 
+                           value="admin@restaurant.com"
+                           autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="admin-password" style="font-size: 0.88rem; font-weight: 600;">Password</label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input type="password" 
+                               id="admin-password" 
+                               class="form-input" 
+                               placeholder="Enter admin password" 
+                               required 
+                               autocomplete="current-password">
+                        <button type="button" 
+                                onclick="toggleAdminPasswordVisibility()" 
+                                style="position: absolute; right: 0.8rem; background: none; border: none; font-size: 1.1rem; cursor: pointer;" 
+                                id="toggle-pwd-btn">🔒</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="admin-submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.85rem;">
+                    Sign In to Admin Panel ➔
+                </button>
+            </form>
+
+            <div style="margin-top: 2rem; text-align: center; font-size: 0.82rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 1.2rem;">
+                <p>Protected System. Authorized Personnel Only.</p>
+                <a href="../index.html" style="color: var(--accent-primary); font-weight: 600; display: inline-block; margin-top: 0.5rem;">← Go to Customer Home Page</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/admin-api.js"></script>
+    <script src="assets/js/admin.js"></script>
+    <script>
+        function toggleAdminPasswordVisibility() {
+            const pwd = document.getElementById('admin-password');
+            const btn = document.getElementById('toggle-pwd-btn');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+                btn.textContent = '👁️';
+            } else {
+                pwd.type = 'password';
+                btn.textContent = '🔒';
+            }
+        }
+
+        document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('admin-email').value.trim();
+            const password = document.getElementById('admin-password').value;
+            const submitBtn = document.getElementById('admin-submit-btn');
+            const alertBox = document.getElementById('auth-alert');
+
+            if (!email || !password) {
+                alertBox.style.display = 'block';
+                alertBox.className = 'auth-alert auth-alert-error';
+                alertBox.textContent = 'Please enter both email and password.';
+                return;
+            }
+
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Signing in...';
+            alertBox.style.display = 'none';
+
+            try {
+                const response = await AdminAPI.login(email, password);
+
+                if (response.success) {
+                    alertBox.style.display = 'block';
+                    alertBox.className = 'auth-alert auth-alert-success';
+                    alertBox.textContent = 'Admin login successful! Redirecting to Dashboard...';
+                    AdminApp.showToast('Welcome Admin!', 'success');
+
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                } else {
+                    alertBox.style.display = 'block';
+                    alertBox.className = 'auth-alert auth-alert-error';
+                    alertBox.textContent = response.message || 'Invalid admin credentials.';
+                    AdminApp.showToast(response.message || 'Admin login failed.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                }
+            } catch (err) {
+                alertBox.style.display = 'block';
+                alertBox.className = 'auth-alert auth-alert-error';
+                alertBox.textContent = 'An error occurred during admin sign in.';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        });
+    </script>
+</body>
+</html>

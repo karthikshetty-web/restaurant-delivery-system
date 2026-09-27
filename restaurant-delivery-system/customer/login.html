@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your Kudla Kitchen account to order delicious coastal delicacies and gourmet dishes.">
+    <title>Customer Login | Kudla Kitchen</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container header-nav">
+            <a href="../index.html" class="brand-logo">
+                <span class="brand-icon">🍛</span>
+                <span>Kudla Kitchen</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../index.html#featured-section" class="nav-link">Menu</a></li>
+                    <li><a href="../cart.html" class="nav-link">Cart</a></li>
+                    <li><a href="../orders.html" class="nav-link">Orders</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-controls">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙</button>
+                <a href="../cart.html" class="cart-link-btn">
+                    <span>🛒</span>
+                    <span>Cart</span>
+                </a>
+                <div id="nav-auth-container">
+                    <!-- Populated by app.js -->
+                </div>
+                <button id="mobile-toggle-btn" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="mobile-nav-drawer">
+        <ul class="mobile-nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#featured-section">Menu</a></li>
+            <li><a href="../cart.html">Cart</a></li>
+            <li><a href="../orders.html">Orders</a></li>
+        </ul>
+        <div id="mobile-nav-auth" style="margin-top: 0.5rem;">
+            <!-- Loaded dynamically by app.js -->
+        </div>
+    </div>
+
+    <!-- Main Auth Container -->
+    <main class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-brand">👋</div>
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Sign in to your Kudla Kitchen customer account</p>
+            </div>
+
+            <!-- API Error / Success Alert Box -->
+            <div id="auth-alert" class="auth-alert" role="alert"></div>
+
+            <form id="login-form" class="auth-form" novalidate>
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email Address</label>
+                    <input type="email" 
+                           id="login-email" 
+                           class="form-input" 
+                           placeholder="name@example.com" 
+                           required 
+                           autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" 
+                               id="login-password" 
+                               class="form-input" 
+                               placeholder="Enter your password" 
+                               required 
+                               autocomplete="current-password">
+                        <button type="button" 
+                                class="toggle-password-btn" 
+                                onclick="AuthUI.togglePassword('login-password', this)" 
+                                title="Show Password">🔒</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="login-submit-btn" class="btn btn-primary auth-submit-btn">
+                    Sign In ➔
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="register.html" class="auth-link">Create Account</a></p>
+                <a href="../index.html" class="back-home-link">← Back to Kudla Kitchen Home</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container" style="text-align: center;">
+            <p>&copy; 2026 Kudla Kitchen. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/auth.js"></script>
+</body>
+</html>

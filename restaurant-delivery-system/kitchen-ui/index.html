@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kudla Kitchen Display System - Dashboard Overview">
+    <title>Kitchen Dashboard | Kudla Kitchen KDS</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Kitchen CSS -->
+    <link rel="stylesheet" href="assets/css/kitchen.css">
+</head>
+<body>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <div class="kitchen-layout">
+        <!-- Sidebar Navigation -->
+        <aside id="kitchen-sidebar" class="kitchen-sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" style="display: flex; align-items: center; gap: 0.6rem; font-size: 1.3rem; font-weight: 800; color: var(--accent-primary);">
+                    <span>👨‍🍳</span>
+                    <span>Kitchen Display</span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="sidebar-menu">
+                    <li><a href="index.html" class="sidebar-link active"><span>📊</span> Dashboard</a></li>
+                    <li><a href="orders.html" class="sidebar-link"><span>🔥</span> Ticket Queue</a></li>
+                </ul>
+            </nav>
+
+            <div style="padding: 1.2rem 1.5rem; border-top: 1px solid var(--border-color);">
+                <button onclick="KitchenApp.logout()" class="btn btn-secondary" style="width: 100%; justify-content: center; color: #dc2626; font-size: 0.88rem;">
+                    🚪 Logout Staff
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="kitchen-main-wrapper">
+            <!-- Topbar -->
+            <header class="kitchen-topbar">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="sidebar-toggle-btn" class="btn btn-secondary" style="display: none; padding: 0.4rem 0.7rem;">☰</button>
+                    <h1 style="font-size: 1.4rem; font-weight: 800;">Kitchen Dashboard</h1>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 1.2rem;">
+                    <button id="kitchen-theme-btn" title="Toggle Dark/Light Mode">☀️</button>
+                    <div id="kitchen-profile-display"></div>
+                </div>
+            </header>
+
+            <!-- Main Section -->
+            <main class="kitchen-content">
+                <div id="kitchen-dashboard-container">
+                    <!-- Loaded dynamically by kitchen.js -->
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer style="padding: 1.5rem 2rem; background: var(--bg-secondary); border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+                <p>&copy; 2026 Kudla Kitchen Display System (KDS). Real-time Kitchen Operations.</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/kitchen-api.js"></script>
+    <script src="assets/js/kitchen.js"></script>
+</body>
+</html>

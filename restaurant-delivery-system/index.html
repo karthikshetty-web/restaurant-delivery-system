@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kudla Kitchen - Authentic Coastal & Gourmet Food Delivery. Enjoy freshly prepared pizzas, burgers, coastal specialties & desserts delivered fast.">
+    <title>Kudla Kitchen | Coastal & Gourmet Food Delivery</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="container header-nav">
+            <a href="index.html" class="brand-logo">
+                <span class="brand-icon">🍛</span>
+                <span>Kudla Kitchen</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="customer/menu.html" class="nav-link">Menu</a></li>
+                    <li><a href="cart.html" class="nav-link">Cart</a></li>
+                    <li><a href="orders.html" class="nav-link">Orders</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-controls">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙</button>
+                <a href="cart.html" class="cart-link-btn">
+                    <span>🛒</span>
+                    <span>Cart</span>
+                </a>
+                <div id="nav-auth-container">
+                    <!-- Loaded dynamically by app.js -->
+                </div>
+                <button id="mobile-toggle-btn" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="mobile-nav-drawer">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#featured-section">Menu</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="orders.html">Orders</a></li>
+        </ul>
+        <div id="mobile-nav-auth" style="margin-top: 0.5rem;">
+            <!-- Loaded dynamically by app.js -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-text-content">
+                    <div class="hero-badge">🔥 Fresh & Authentic Taste</div>
+                    <h1 class="hero-title">Delicious Coastal & <span>Gourmet Delights</span> Delivered Hot</h1>
+                    <p class="hero-subtitle">
+                        Welcome to Kudla Kitchen! Experience authentic coastal flavors, artisan pizzas, juicy burgers, and mouthwatering desserts cooked fresh and delivered to your doorstep in minutes.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#featured-section" class="btn btn-primary">Order Now ➔</a>
+                        <a href="#categories-section" class="btn btn-secondary">Browse Menu</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h4>30 Mins</h4>
+                            <p>Super Fast Delivery</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>100%</h4>
+                            <p>Fresh Ingredients</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>4.9 ★</h4>
+                            <p>Customer Rating</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700&auto=format&fit=crop&q=80" 
+                         alt="Kudla Kitchen Special Gourmet Feast" 
+                         class="hero-main-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section id="categories-section" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Menu Categories</div>
+                    <h2 class="section-title">Explore What You Crave</h2>
+                    <p class="section-subtitle">Pick a category to filter your favorite dishes instantly</p>
+                </div>
+                <div id="categories-container" class="categories-grid">
+                    <!-- Populated dynamically via GET /api/categories/get.php -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Food Section -->
+        <section id="featured-section" class="section" style="background: var(--bg-surface);">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Our Specialties</div>
+                    <h2 class="section-title">Featured Menu Items</h2>
+                    <p class="section-subtitle">Hand-crafted recipes prepared with passion and top ingredients</p>
+                </div>
+
+                <!-- Controls & Search -->
+                <div class="food-controls">
+                    <div id="category-tabs" class="category-tabs">
+                        <!-- Category tabs populated dynamically -->
+                    </div>
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" 
+                               id="food-search-input" 
+                               class="search-input" 
+                               placeholder="Search dishes or ingredients...">
+                    </div>
+                </div>
+
+                <!-- Food Items Grid -->
+                <div id="food-container" class="food-grid">
+                    <!-- Populated dynamically via GET /api/food/get.php -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="index.html" class="brand-logo">
+                        <span class="brand-icon">🍛</span>
+                        <span>Kudla Kitchen</span>
+                    </a>
+                    <p>Delivering authentic coastal delicacies, gourmet pizzas, and delicious quick bites right to your home with speed and safety.</p>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#featured-section">Menu</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#categories-section">Gourmet Pizzas</a></li>
+                        <li><a href="#categories-section">Burgers & Wraps</a></li>
+                        <li><a href="#categories-section">Pasta & Italian</a></li>
+                        <li><a href="#categories-section">Beverages & Desserts</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Operating Hours</h3>
+                    <ul class="footer-links">
+                        <li>Monday - Sunday</li>
+                        <li>10:00 AM - 11:00 PM</li>
+                        <li style="margin-top: 0.5rem; color: var(--accent-primary); font-weight: 600;">⚡ Instant Delivery</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kudla Kitchen. All rights reserved. Powered by PHP & REST API.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

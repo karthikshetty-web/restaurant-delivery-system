@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kudla Kitchen Administrator Control Panel - Dashboard Metrics & Order Overview">
+    <title>Admin Dashboard Overview | Kudla Kitchen</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <div class="admin-layout">
+        <!-- Sidebar Navigation -->
+        <aside id="admin-sidebar" class="admin-sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" style="display: flex; align-items: center; gap: 0.6rem; font-size: 1.3rem; font-weight: 800; color: var(--accent-primary);">
+                    <span>👑</span>
+                    <span>Kudla Admin</span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="sidebar-menu">
+                    <li><a href="index.html" class="sidebar-link active"><span>📊</span> Dashboard</a></li>
+                    <li><a href="orders.html" class="sidebar-link"><span>📦</span> Orders</a></li>
+                    <li><a href="food.html" class="sidebar-link"><span>🍕</span> Food Items</a></li>
+                    <li><a href="categories.html" class="sidebar-link"><span>🏷️</span> Categories</a></li>
+                    <li><a href="users.html" class="sidebar-link"><span>👥</span> Customers</a></li>
+                    <li><a href="delivery.html" class="sidebar-link"><span>🚴</span> Delivery Partners</a></li>
+                    <li><a href="coupons.html" class="sidebar-link"><span>🎟️</span> Coupons</a></li>
+                    <li><a href="reports.html" class="sidebar-link"><span>📈</span> Reports</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button onclick="AdminApp.logout()" class="btn btn-secondary" style="width: 100%; justify-content: center; color: #dc2626; font-size: 0.88rem;">
+                    🚪 Logout Admin
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="admin-main-wrapper">
+            <!-- Sticky Topbar -->
+            <header class="admin-topbar">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="sidebar-toggle-btn" class="btn btn-secondary" style="display: none; padding: 0.4rem 0.7rem;" aria-label="Toggle Navigation Sidebar">☰</button>
+                    <h1 style="font-size: 1.4rem; font-weight: 800; color: var(--text-primary);">Dashboard Overview</h1>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 1.2rem;">
+                    <button id="admin-theme-btn" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙</button>
+                    <div id="admin-profile-display">
+                        <!-- Populated by admin.js -->
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Main Section -->
+            <main class="admin-content">
+                <div id="admin-dashboard-container">
+                    <!-- Rendered dynamically by AdminApp.loadDashboard() -->
+                </div>
+            </main>
+
+            <!-- Admin Footer -->
+            <footer style="padding: 1.5rem 2rem; background: var(--bg-secondary); border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+                <p>&copy; 2026 Kudla Kitchen Admin Control Panel. Powered by PHP & REST API.</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/admin-api.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
