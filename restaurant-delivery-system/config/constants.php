@@ -5,19 +5,20 @@
 define('APP_NAME', 'Restaurant Delivery System');
 define('APP_VERSION', '1.0.0');
 
-// Update this for your live Railway website
-define('BASE_URL', 'https://restaurant-delivery-system-production.up.railway.app');
+define(
+    'BASE_URL',
+    getenv('BASE_URL') ?: 'https://restaurant-delivery-system-production.up.railway.app'
+);
 
 // Database Configuration
-// Railway variables are used in production.
-// Local defaults are retained for local development.
+// Prefer DB_* variables, then fall back to Railway MySQL variables.
 
-define('DB_HOST', getenv('MYSQLHOST') ?: 'localhost');
-define('DB_NAME', getenv('MYSQLDATABASE') ?: 'restaurant_delivery_db');
-define('DB_USER', getenv('MYSQLUSER') ?: 'root');
-define('DB_PASS', getenv('MYSQLPASSWORD') ?: '');
+define('DB_HOST', getenv('DB_HOST') ?: getenv('MYSQLHOST') ?: 'localhost');
+define('DB_NAME', getenv('DB_NAME') ?: getenv('MYSQLDATABASE') ?: 'restaurant_delivery_db');
+define('DB_USER', getenv('DB_USER') ?: getenv('MYSQLUSER') ?: 'root');
+define('DB_PASS', getenv('DB_PASSWORD') ?: getenv('MYSQLPASSWORD') ?: '');
 define('DB_PASSWORD', DB_PASS);
-define('DB_PORT', getenv('MYSQLPORT') ?: '3306');
+define('DB_PORT', getenv('DB_PORT') ?: getenv('MYSQLPORT') ?: '3306');
 
 // JWT & Security Secret
 define(
