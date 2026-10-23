@@ -1,20 +1,29 @@
+
 <?php
 // Application Constants & Environment Definitions
 
 define('APP_NAME', 'Restaurant Delivery System');
 define('APP_VERSION', '1.0.0');
-define('BASE_URL', 'http://localhost/restaurant-delivery-system');
+
+// Update this for your live Railway website
+define('BASE_URL', 'https://restaurant-delivery-system-production.up.railway.app');
 
 // Database Configuration
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'restaurant_delivery_db');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_PASSWORD', ''); // Alias as requested
-define('DB_PORT', '3306');
+// Railway variables are used in production.
+// Local defaults are retained for local development.
+
+define('DB_HOST', getenv('MYSQLHOST') ?: 'localhost');
+define('DB_NAME', getenv('MYSQLDATABASE') ?: 'restaurant_delivery_db');
+define('DB_USER', getenv('MYSQLUSER') ?: 'root');
+define('DB_PASS', getenv('MYSQLPASSWORD') ?: '');
+define('DB_PASSWORD', DB_PASS);
+define('DB_PORT', getenv('MYSQLPORT') ?: '3306');
 
 // JWT & Security Secret
-define('SECRET_KEY', 'restaurant_delivery_system_super_secret_jwt_key_2026');
+define(
+    'SECRET_KEY',
+    getenv('SECRET_KEY') ?: 'restaurant_delivery_system_super_secret_jwt_key_2026'
+);
 
 // User Roles
 define('ROLE_CUSTOMER', 'customer');
